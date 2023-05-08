@@ -98,7 +98,7 @@ class NewWindow(QDialog, QWidget, form_class):
         
     def RunProgram(self):
         
-        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!@127.0.0.1:3306/raw_file", encoding = 'utf-8')
+        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!!@127.0.0.1:3306/raw_file", encoding = 'utf-8')
         conn = engine.connect()
         self.showtext.setText("DB에 연결됐습니다.")
         

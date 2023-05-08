@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>491</width>
+    <height>640</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>431</width>
+     <height>601</height>
+    </rect>
+   </property>
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="13" column="0">
+     <widget class="QLineEdit" name="editfilename">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QPushButton" name="excel_savebtn">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>저 장</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLineEdit" name="showfilename">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QComboBox" name="setdbname">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>Biopsy</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Block Mapping</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Comorbidity</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Endoscope</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Genetic</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Operation Record</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Pathology</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Patient</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Registry</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Wash Cytology</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="excel_importbtn">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>불 러 오 기</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QPushButton" name="excel_selectbtn">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>선 택</string>
+      </property>
+     </widget>
+    </item>
+    <item row="11" column="0" colspan="2">
+     <widget class="QLabel" name="showtext2">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QLabel" name="showtext1">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0" colspan="2">
+     <widget class="QLabel" name="showtext3">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="16" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="excel_actbtn">
+        <property name="font">
+         <font>
+          <family>나눔스퀘어라운드 Regular</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>실 행</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="excel_closebtn">
+        <property name="font">
+         <font>
+          <family>나눔스퀘어라운드 Regular</family>
+         </font>
+        </property>
+        <property name="text">
+         <string>취 소</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <widget class="QComboBox" name="setsheet">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>sheet1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>sheet2</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLineEdit" name="showdbname">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="1">
+     <widget class="QPushButton" name="excel_editbtn">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>저 장</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Bold</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>엑셀 파일 불러오기</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0" colspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Bold</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>DB 지정하기</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="12" column="0" colspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Bold</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;File 이름 설정하기&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="label_1">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 ExtraBold</family>
+        <pointsize>18</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;새로운 DB 업로드&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0" colspan="2">
+     <widget class="QLabel" name="showtext4">
+      <property name="font">
+       <font>
+        <family>나눔스퀘어라운드 Regular</family>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
