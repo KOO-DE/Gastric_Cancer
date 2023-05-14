@@ -5,6 +5,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 import pymysql
 import sqlalchemy
+from sqlalchemy.dialects.mysql import *
 pymysql.install_as_MySQLdb()
 
 form_class = uic.loadUiType("File_Upload/Excel_Window.ui")[0]
@@ -61,6 +62,7 @@ class ExcelWindow(QDialog, QWidget, form_class):
     def FileNamesSelect(self):
         
         print("comboBox index:", self.setdbname.currentText())
+        
         if self.setdbname.currentText() == "Biopsy":
             self.showdbname.setText("biopsy_protocol")
         elif self.setdbname.currentText() == "Block Mapping":
@@ -89,12 +91,16 @@ class ExcelWindow(QDialog, QWidget, form_class):
         db_name = self.showdbname.text()
         self.showtext2.setText(db_name)
         
+        print("DB Name:", db_name)
+        
     def printFileName(self):
         
         global file_name
         
         file_name = self.editfilename.text()
         self.showtext3.setText(file_name)
+        
+        print("File Name:", file_name)
         
     def RunProgram(self):
         
@@ -109,7 +115,7 @@ class ExcelWindow(QDialog, QWidget, form_class):
             
             for i,j in zip(frames.columns, frames.dtypes):
                 if "object" in str(j):
-                    dtypedict.update({i: sqlalchemy.types.TEXT()})
+                    dtypedict.update({i: LONGTEXT()})
                 
                 elif "float" in str(j):
                     dtypedict.update({i: sqlalchemy.types.Float(precision = 3, asdecimal = True)})
@@ -123,7 +129,9 @@ class ExcelWindow(QDialog, QWidget, form_class):
         self.showtext4.setText("DB에 파일이 업로드 되었습니다.")
         
         conn.close
-    
+        
+        print("DB에 파일이 업로드 되었습니다.")
+        
     # def sqlcol(dfparam):    
         
 
