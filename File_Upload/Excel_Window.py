@@ -25,11 +25,11 @@ class ExcelWindow(QDialog, QWidget, form_class):
         self.excel_importbtn.clicked.connect(self.openFileNamesDialog)   
         # excel 파일 불러오기 버튼 클릭
         
-        self.excel_selectbtn.clicked.connect(self.FileNamesSelect) 
+        self.excel_selectbtn.clicked.connect(self.selectTableNames) 
         
-        self.excel_savebtn.clicked.connect(self.saveFileName)
+        self.excel_savebtn.clicked.connect(self.saveTableName)
         
-        self.excel_editbtn.clicked.connect(self.printFileName)
+        self.excel_editbtn.clicked.connect(self.printDBName)
         
         self.excel_actbtn.clicked.connect(self.RunProgram)
         
@@ -59,59 +59,59 @@ class ExcelWindow(QDialog, QWidget, form_class):
         self.showtext1.setText("파일을 열었습니다.\n\nDB 이름을 설정해 주세요.")
         # self.btn1.setDisabled(True)
         
-    def FileNamesSelect(self):
+    def selectTableNames(self):
         
-        print("comboBox index:", self.setdbname.currentText())
+        print("Table Name:", self.settablename.currentText())
         
-        if self.setdbname.currentText() == "Biopsy":
-            self.showdbname.setText("biopsy_protocol")
-        elif self.setdbname.currentText() == "Block Mapping":
-            self.showdbname.setText("block_mapping_protocol")
-        elif self.setdbname.currentText() == "Comorbidity":
-            self.showdbname.setText("comorbidity_protocol")
-        elif self.setdbname.currentText() == "Endoscope":
-            self.showdbname.setText("endoscope_protocol")
-        elif self.setdbname.currentText() == "Genetic":
-            self.showdbname.setText("genetic_protocol")
-        elif self.setdbname.currentText() == "Operation Record":
-            self.showdbname.setText("operation_record_protocol")
-        elif self.setdbname.currentText() == "Pathology":
-            self.showdbname.setText("pathology_protocol")
-        elif self.setdbname.currentText() == "Patient":
-            self.showdbname.setText("patient_protocol")
-        elif self.setdbname.currentText() == "Registry":
-            self.showdbname.setText("registry_protocol")
-        elif self.setdbname.currentText() == "Wash Cytology":
-            self.showdbname.setText("wash_cytology_protocol")
+        if self.settablename.currentText() == "Biopsy":
+            self.showtablename.setText("biopsy_protocol")
+        elif self.settablename.currentText() == "Block Mapping":
+            self.showtablename.setText("block_mapping_protocol")
+        elif self.settablename.currentText() == "Comorbidity":
+            self.showtablename.setText("comorbidity_protocol")
+        elif self.settablename.currentText() == "Endoscope":
+            self.showtablename.setText("endoscope_protocol")
+        elif self.settablename.currentText() == "Genetic":
+            self.showtablename.setText("genetic_protocol")
+        elif self.settablename.currentText() == "Operation Record":
+            self.showtablename.setText("operation_record_protocol")
+        elif self.settablename.currentText() == "Pathology":
+            self.showtablename.setText("pathology_protocol")
+        elif self.settablename.currentText() == "Patient":
+            self.showtablename.setText("patient_protocol")
+        elif self.settablename.currentText() == "Registry":
+            self.showtablename.setText("registry_protocol")
+        elif self.settablename.currentText() == "Wash Cytology":
+            self.showtablename.setText("wash_cytology_protocol")
         
-    def saveFileName(self):
+    def saveTableName(self):
+        
+        global table_name
+        
+        table_name = self.showdbname.text()
+        self.showtext2.setText(table_name)
+        
+        print("Table Name:", table_name)
+        
+    def printDBName(self):
         
         global db_name
         
-        db_name = self.showdbname.text()
-        self.showtext2.setText(db_name)
+        db_name = self.editfilename.text()
+        self.showtext3.setText(db_name)
         
         print("DB Name:", db_name)
         
-    def printFileName(self):
-        
-        global file_name
-        
-        file_name = self.editfilename.text()
-        self.showtext3.setText(file_name)
-        
-        print("File Name:", file_name)
-        
     def RunProgram(self):
         
-        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!!@127.0.0.1:3306/{}".format(db_name), encoding = 'utf-8')
+        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!!@127.0.0.1:3306/{}".format(table_name), encoding = 'utf-8')
         conn = engine.connect()
         
         self.showtext4.setText("DB에 연결됐습니다.")
         
         dtypedict = {}
         
-        if file_name != None:
+        if db_name != None:
             
             for i,j in zip(frames.columns, frames.dtypes):
                 if "object" in str(j):
@@ -125,7 +125,8 @@ class ExcelWindow(QDialog, QWidget, form_class):
             
         # outputdict = self.sqlcol(frames)
         
-        frames.to_sql(name = file_name, con = engine, if_exists = 'replace', index = False, dtype = dtypedict) 
+        frames.to_sql(name = db_name, con = engine, if_exists = 'replace', index = False, dtype = dtypedict)
+        
         self.showtext4.setText("DB에 파일이 업로드 되었습니다.")
         
         conn.close

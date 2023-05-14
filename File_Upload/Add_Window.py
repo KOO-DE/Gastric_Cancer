@@ -19,7 +19,7 @@ class AddWindow(QDialog, QWidget, form_class):
         
     def initUI(self):
         self.setupUi(self)
-        self.add_homebtn.clicked.connect(self.Home)
+        self.add_closebtn.clicked.connect(self.Cancel)
         self.add_importbtn.clicked.connect(self.openFileNamesDialog)   
         self.add_selectbtn.clicked.connect(self.FileNamesSelect) 
         self.add_savebtn.clicked.connect(self.saveFileName)
@@ -59,12 +59,12 @@ class AddWindow(QDialog, QWidget, form_class):
             # csvReader = csv.reader(f)
             # print(csvReader)
         
-        self.showtext.setText("파일을 열었습니다.\n\nDB 이름을 설정해 주세요")
+        self.showtext1.setText("파일을 열었습니다.\n\nDB 이름을 설정해 주세요")
         # self.btn1.setDisabled(True)
     
-    def FileNamesSelect(self):
+    def selectDBName(self):
         
-        print("comboBox index:", self.setdbname.currentText())
+        print("DB Name:", self.setdbname.currentText())
         if self.setdbname.currentText() == "환자정보":
             self.showdbname.setText("patient")
         elif self.setdbname.currentText() == "진단":
@@ -93,17 +93,23 @@ class AddWindow(QDialog, QWidget, form_class):
             self.showdbname.setText("outpatient")
         elif self.setdbname.currentText() == "ASA":
             self.showdbname.setText("asa_score")
+    
+    def saveTableName(self):
         
-    def saveFileName(self):
+        global table_name
         
-        global text
+        table_name = self.showtablename.text()
+        self.show
+    def saveDBName(self):
         
-        text = self.showdbname.text()
-        self.showtext.setText(text)
+        global db_name
+        
+        db_name = self.showdbname.text()
+        self.showtext3.setText(db_name)
     
     def RunProgram(self):
         
-        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!!@127.0.0.1:3306/raw_file", encoding = 'utf-8')
+        engine = create_engine("mysql+mysqldb://cnuh:cnuh12345!!@127.0.0.1:3306/{}".format(table_name), encoding = 'utf-8')
         conn = engine.connect()
         
         con = pymysql.connect(host = 'localhost',
@@ -116,7 +122,7 @@ class AddWindow(QDialog, QWidget, form_class):
         
         self.showtext.setText("DB에 연결 되었습니다")
         
-        if text == "operation":
+        if db_name == "operation":
             
             for 원무접수ID, 환자번호, 환자명, 성별, 생년월일, 수술일자, 수술코드, 수술명, ICD9CM코드, ICD9CM명, 수술_진료과코드, 수술_진료과, 집도의_사번, 집도의, 수석의_사번, 수석의, 수술후퇴실장소코드, 수술후퇴실장소, 마취종류코드, 마취종류, 수술진단코드, 수술진단명, 입실일시, 마취시작, 수술시작시간, 수술종료시간, 마취종료, 퇴실시간, 회복실입실일시, 회복실퇴실일시  in zip(
                 frames["원무접수ID"], frames["환자번호"], frames["환자명"], frames["성별"], frames["생년월일"], frames["수술일자"], frames["수술코드"], frames["수술명"],
@@ -157,7 +163,7 @@ class AddWindow(QDialog, QWidget, form_class):
                         `회복실퇴실일시`
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
-                '''.format(text)
+                '''.format(db_name)
                 
                 # if "float" in str(type(의무기록내용_수치값)):
                 #     의무기록내용_수치값 = str(의무기록내용_수치값)
@@ -168,7 +174,7 @@ class AddWindow(QDialog, QWidget, form_class):
                 
                 cursor.execute(sql %(원무접수ID, 환자번호, 환자명, 성별, 생년월일, 수술일자, 수술코드, 수술명, ICD9CM코드, ICD9CM명, 수술_진료과코드, 수술_진료과, 집도의_사번, 집도의, 수석의_사번, 수석의,수술후퇴실장소코드, 수술후퇴실장소, 마취종류코드, 마취종류, 수술진단코드, 수술진단명, 입실일시, 마취시작, 수술시작시간, 수술종료시간,마취종료, 퇴실시간, 회복실입실일시, 회복실퇴실일시))
         
-        if text == "operation_record":
+        if db_name == "operation_record":
             
             for 원무접수ID, 환자번호, 환자명, 성별, 생년월일, 의무기록작성일, 수정기록일, 의무기록작성_진료과코드, 의무기록작성_진료과, 작성의_사번, 작성의, 의무기록_환자진료과코드, 의무기록_환자진료과, 진료서식ID, 의무기록명, 진료서식구성원소ID, 의무기록항목명, 의무기록내용_수치값, 의무기록내용, 진료서식유형코드, 의무기록구분명, 진료기록서명여부  in zip(
                 frames["원무접수ID"], frames["환자번호"], frames["환자명"], frames["성별"], frames["생년월일"], frames["의무기록작성일"], frames["수정기록일"], frames["의무기록작성 진료과코드"],
@@ -200,7 +206,7 @@ class AddWindow(QDialog, QWidget, form_class):
                         `진료기록서명여부`
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                    '''.format(text)
+                    '''.format(db_name)
                     
                 if "float" in str(type(의무기록내용_수치값)):
                     의무기록내용_수치값 = str(의무기록내용_수치값)
@@ -212,7 +218,7 @@ class AddWindow(QDialog, QWidget, form_class):
                 
                 cursor.execute(sql %(원무접수ID, 환자번호, 환자명, 성별, 생년월일, 의무기록작성일, 수정기록일, 의무기록작성_진료과코드, 의무기록작성_진료과, 작성의_사번, 작성의, 의무기록_환자진료과코드, 의무기록_환자진료과, 진료서식ID, 의무기록명, 진료서식구성원소ID, 의무기록항목명, 의무기록내용_수치값, 의무기록내용, 진료서식유형코드, 의무기록구분명, 진료기록서명여부))
 
-        if text == "blood_test":
+        if db_name == "blood_test":
             
             for 원무접수ID, 환자번호, 환자명, 성별, 생년월일, 검사시행일, 검사코드, 검사명, 검사세부항목명, 검사서식세부항목ID, 검사결과_수치값, 검사결과_음성양성, 검사결과, 판독의사번, 판독의, 검사처방일, 검사_처방의사번, 검사_처방의, 검사유형, 검사_시행처, 처방전표분류, 응급여부, 시행여부 in zip(
                 frames["원무접수ID"], frames["환자번호"], frames["환자명"], frames["성별"], frames["생년월일"], frames["검사시행일"], frames["검사코드"], frames["검사명"],
@@ -245,7 +251,7 @@ class AddWindow(QDialog, QWidget, form_class):
                         , `시행여부`
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                '''.format(text)
+                '''.format(db_name)
                 
                 if "float" in str(type(검사결과_수치값)):
                     검사결과_수치값 = str(검사결과_수치값)
@@ -254,7 +260,7 @@ class AddWindow(QDialog, QWidget, form_class):
                 
                 cursor.execute(sql %(원무접수ID, 환자번호, 환자명, 성별, 생년월일, 검사시행일, 검사코드, 검사명, 검사세부항목명, 검사서식세부항목ID, 검사결과_수치값, 검사결과_음성양성, 검사결과, 판독의사번, 판독의, 검사처방일, 검사_처방의사번, 검사_처방의, 검사유형, 검사_시행처, 처방전표분류, 응급여부, 시행여부))
         
-        if text == "nursing_record":
+        if db_name == "nursing_record":
             
             for 원무접수ID, 환자번호, 환자명, 성별, 생년월일, 간호기록부서,기록작성일시, 기록종류명, 간호항목_진술문명, Entity, Attribute, Value, Ent_Atr_항목 in zip(
                 frames["원무접수ID"], frames["환자번호"] , frames["환자명"], frames["성별"] , frames["생년월일"], frames["[간호기록]간호기록부서"], frames["[간호기록]기록작성일시"],
@@ -276,7 +282,7 @@ class AddWindow(QDialog, QWidget, form_class):
                         `Ent:Atr:항목`
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                    '''.format(text)
+                    '''.format(db_name)
                     
                 if "str" in str(type(간호항목_진술문명)):
                     간호항목_진술문명 = str(간호항목_진술문명).replace('\\','').replace("'","\\'")
@@ -288,7 +294,7 @@ class AddWindow(QDialog, QWidget, form_class):
                 
                 cursor.execute(sql %(원무접수ID, 환자번호, 환자명, 성별, 생년월일, 간호기록부서, 기록작성일시, 기록종류명, 간호항목_진술문명, Entity, Attribute, Value, Ent_Atr_항목))
         
-        if text == "image":
+        if db_name == "image":
             
             for 원무접수ID, 환자번호, 환자명, 성별, 생년월일, 검사시행일, 검사코드, 검사명, 검사세부항목명, 검사서식세부항목ID, 검사결과_수치값, 검사결과_음성양성, 검사결과, 판독의사번, 판독의, 검사처방일, 검사_처방의사번, 검사_처방의, 검사유형, 검사_시행처, 처방전표분류, 응급여부, 시행여부 in zip(
                 frames["원무접수ID"], frames["환자번호"], frames["환자명"], frames["성별"], frames["생년월일"], frames["검사시행일"], frames["검사코드"], frames["검사명"],
@@ -321,7 +327,7 @@ class AddWindow(QDialog, QWidget, form_class):
                         `시행여부`
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
-                    '''.format(text)
+                    '''.format(db_name)
                     
                 if "str" in str(type(검사결과)):
                     검사결과 = str(검사결과).replace('\\','').replace("'","\\'")
@@ -340,12 +346,13 @@ class AddWindow(QDialog, QWidget, form_class):
                 cursor.execute(sql %(원무접수ID, 환자번호, 환자명, 성별, 생년월일, 검사시행일, 검사코드, 검사명, 검사세부항목명, 검사서식세부항목ID, 검사결과_수치값, 검사결과_음성양성, 검사결과, 판독의사번, 판독의, 검사처방일, 검사_처방의사번, 검사_처방의, 검사유형, 검사_시행처, 처방전표분류, 응급여부, 시행여부))
         
         con.commit()
+        
         con.close
         
-        sql = "SELECT DISTINCT * FROM raw_file_total.{0}".format(text)
+        sql = "SELECT DISTINCT * FROM {}.{}".format(table_name, db_name)
         
         df = pd.read_sql(sql, engine)
-        df.to_sql(name = text, con = engine, if_exists = 'replace', index = False) 
+        df.to_sql(name = db_name, con = engine, if_exists = 'replace', index = False) 
         
         self.showtext.setText("DB에 파일이 업로드 되었습니다")
         
