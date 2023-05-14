@@ -22,7 +22,7 @@ class BlockMapping_01_03(BaseETL):
         f.close()
         
         df = self.df_from_sql(db_name = "block_mapping_protocol", sql = sql)
-        df.to_excel('D:/Gastric_Cancer_xlsx/Block_Mapping/Block_Mapping01_03.xlsx')
+        df.to_excel('C:/Koos/CNUH/Gastric_Cancer_xlsx/Block_Mapping/Block_Mapping01_03.xlsx')
         
         self.insert(df, db_name = "block_mapping_protocol", tb_name = "block_mapping_01_03")
 
