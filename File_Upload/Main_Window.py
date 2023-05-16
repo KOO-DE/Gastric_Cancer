@@ -2,7 +2,8 @@ import sys
 from PyQt5 import uic
 from PyQt5.QtWidgets import *
 from New_Window import NewWindow
-from Add_Window import AddWindow
+from Add_Window2 import AddWindow2
+#from Add_Window import AddWindow
 from Excel_Window import ExcelWindow
 from Download_Window import DownloadWindow
 
@@ -32,13 +33,20 @@ class MyWindow(QMainWindow, form_class):
         self.new = NewWindow()
         self.new.exec()
         self.show()
-    
+        
+    def ButtonAdd(self):
+        self.hide()
+        self.new = AddWindow2()
+        self.new.exec()
+        self.show()
+        
+    '''
     def ButtonAdd(self):
         self.hide()
         self.new = AddWindow()
         self.new.exec()
         self.show()
-        
+    '''
     def ButtonExcel(self):
         self.hide()
         self.new = ExcelWindow()

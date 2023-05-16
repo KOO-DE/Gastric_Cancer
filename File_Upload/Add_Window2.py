@@ -10,10 +10,10 @@ pymysql.install_as_MySQLdb()
 
 form_class = uic.loadUiType("File_Upload/New_Window.ui")[0]
 
-class NewWindow(QDialog, QWidget, form_class):
+class AddWindow2(QDialog, QWidget, form_class):
     
     def __init__(self):
-        super(NewWindow,self).__init__()
+        super(AddWindow2,self).__init__()
         self.initUI()
         self.show()
         
@@ -501,7 +501,7 @@ class NewWindow(QDialog, QWidget, form_class):
         # outputdict = self.sqlcol(frames)
         
         frames.drop_duplicates()
-        frames.to_sql(name = db_name, con = engine, if_exists = 'replace', index = False, dtype = dtypedict)
+        frames.to_sql(name = db_name, con = engine, if_exists = 'append', index = False, dtype = dtypedict)
         
         self.showtext4.setText("DB에 파일이 업로드 되었습니다.")
         
